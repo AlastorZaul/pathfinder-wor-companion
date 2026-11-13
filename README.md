@@ -2,12 +2,12 @@
 
 Guides de build pour les compagnons de **Pathfinder: Wrath of the Righteous**, en français.
 
-Site en ligne : https://alastorzaul.github.io/pathfinder-wor-companion/
+Site en ligne : à définir (GitHub Pages, une fois le dépôt créé).
 
 ## Contenu
 
 ### Compagnons
-- **Vue d'ensemble** : les compagnons relevés sur la page Companion Builds du wiki Fextralife, avec leur classe recommandée.
+- **Vue d'ensemble** : les compagnons de la campagne principale, des chemins mythiques et des DLC, d'après la page Companions du wiki Fextralife.
 - **Ember**, **Delamere**, **Arueshalae**, **Woljif Jefto**, **Sosiel** : build détaillé, avec ordre de montée de niveau, dons, sorts, équipement, points forts et points faibles.
 - **Daeran**, **Regill**, **Greybor** : build résumé. Les niveaux ne sont pas précisés dans la source.
 
@@ -23,22 +23,25 @@ builds.html         Builds par classe
 <compagnon>.html    Une page par compagnon détaillé
 style.css           Style commun à toutes les pages
 theme.js            Bouton clair / sombre et menu mobile
+.github/workflows/  Déploiement automatique sur GitHub Pages
 ```
 
 Chaque page reprend la même barre de navigation. Quand tu ajoutes une page, pense à l'ajouter dans la barre de navigation de toutes les autres, et dans l'accueil.
 
 ## Compagnons à compléter
 
-Camellia, Seelah, Lann, Wenduag et Nenio n'ont qu'une description de classe sur la page Companion Builds, sans build détaillé. La page annonce 15 compagnons ; seuls 13 ont été relevés. Les deux restants sont à identifier.
+- Camellia, Seelah et Nenio n'ont qu'une description de classe, sans build détaillé.
+- Finnean (arme parlante), les compagnons du chemin Lich (sauf Delamere), Aivu, Trever et les compagnons des DLC n'ont pas encore de page.
+- Lann et Wenduag sont exclusifs : une partie n'en prend qu'un des deux.
 
 ## Déploiement
 
-Le site est publié par GitHub Pages directement depuis la branche `main` (racine du dépôt). Chaque push sur `main` relance le déploiement natif, sans workflow maison.
+Le site est déployé automatiquement par GitHub Actions à chaque push sur `main` (voir `.github/workflows/pages.yml`). Si le déploiement est en attente, il faut l'approuver dans l'onglet **Actions** du dépôt.
 
 ## Sources et limites
 
 Les données viennent de :
-- **Wiki Fextralife** : page Companion Builds, page Builds et guides de build par compagnon.
+- **Wiki Fextralife** : pages Companions, Companion Builds et Builds, ainsi que les guides de build par compagnon.
 
 Limites à garder en tête :
 - Plusieurs guides datent de septembre 2021 et ne correspondent peut-être plus à la version actuelle du jeu.
