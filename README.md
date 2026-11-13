@@ -15,11 +15,15 @@ Site en ligne : https://alastorzaul.github.io/pathfinder-wor-companion/
 - **Builds par classe** : pages de build du wiki (Eldritch Knight, Inquisitor, Magus, Monk, Rogue, Warpriest, Bloodrager, Arcanist), builds d'archers et guides mis en avant.
 - **Builds maison** : builds inventés à partir des guides du wiki, non testés en jeu. Première version : un Cavalier tank pour une première partie en Normal, avec les dons encore à choisir.
 
+### Outils
+- **Calculateur de dés** : formules de dés avec bonus ou malus (NdF+B), avec minimum, maximum et moyenne.
+
 ## Structure du dépôt
 
 ```
 index.html          Accueil
 companions.html     Vue d'ensemble des compagnons
+calculateur-des.html Calculateur de dés
 builds.html         Builds par classe
 <compagnon>.html    Une page par compagnon détaillé
 style.css           Style commun à toutes les pages

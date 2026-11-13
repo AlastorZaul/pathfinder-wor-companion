@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculateur de dés : WOTR Companions</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="site-nav">
+  <details class="nav-group" open>
+    <summary class="nav-title">Démarrer</summary>
+    <a href="index.html">Accueil</a>
+    <a href="companions.html">Vue d&#x27;ensemble</a>
+  </details>
+  <details class="nav-group" open>
+    <summary class="nav-title">Compagnons</summary>
+    <a href="ember.html">Ember</a>
+    <a href="delamere.html">Delamere</a>
+    <a href="arueshalae.html">Arueshalae</a>
+    <a href="woljif.html">Woljif Jefto</a>
+    <a href="sosiel.html">Sosiel</a>
+    <a href="daeran.html">Daeran</a>
+    <a href="regill.html">Regill</a>
+    <a href="greybor.html">Greybor</a>
+  </details>
+  <details class="nav-group" open>
+    <summary class="nav-title">Builds</summary>
+    <a href="builds.html">Builds par classe</a>
+    <a href="builds-maison.html">Builds maison</a>
+  </details>
+  <details class="nav-group" open>
+    <summary class="nav-title">Outils</summary>
+    <a href="calculateur-des.html" aria-current="page">Calculateur de dés</a>
+  </details>
+</nav>
+<main>
+
+  <h1>Calculateur de dés</h1>
+  <p class="subtitle">Outil maison · Formules de dés pour Pathfinder: Wrath of the Righteous</p>
+
+  <div class="card warning">
+    <strong>Avertissement.</strong> Ces guides reposent sur des guides communautaires (Fextralife). Les dons, les niveaux et les valeurs peuvent changer selon la version et les patchs. Vérifie chaque point en jeu.
+  </div>
+
+  <div class="card"><strong>Calculateur de dés.</strong> Écris une formule avec des dés (NdF) et des bonus ou malus, par exemple 2d6+4 ou 1d20-1. Les termes peuvent s'enchaîner, comme 1d4+1d6+2.</div>
+
+  <h2>Lancer</h2>
+  <label for="dice-expr">Formule</label>
+  <input class="filter-input" id="dice-expr" type="text" value="1d20+5" autocomplete="off">
+  <p><button class="btn" id="dice-roll" type="button">Lancer</button></p>
+  <p><button class="btn" type="button" data-dice="1d20">1d20</button> <button class="btn" type="button" data-dice="1d20+5">1d20+5</button> <button class="btn" type="button" data-dice="2d6">2d6</button> <button class="btn" type="button" data-dice="1d8+3">1d8+3</button> <button class="btn" type="button" data-dice="3d6">3d6</button> <button class="btn" type="button" data-dice="4d6">4d6</button></p>
+  <div id="dice-out" aria-live="polite"></div>
+
+  <h2>Notes</h2>
+  <ul>
+    <li>Les jets utilisent le générateur aléatoire du navigateur. Ce calculateur ne tient pas compte des bonus de situation ni des règles du jeu.</li>
+    <li>Il sert à estimer des dégâts ou des probabilités rapidement ; les résultats du jeu restent la référence.</li>
+  </ul>
+
+<script>
+function parseDice(expr) {
+  const s = expr.replace(/\s+/g, '');
+  if (!s) return null;
+  const re = /([+-]?)(\d*)d(\d+)|([+-]?)(\d+)/gi;
+  const terms = [];
+  let pos = 0, m;
+  while ((m = re.exec(s)) !== null) {
+    if (m.index !== pos) return null;
+    pos = re.lastIndex;
+    if (m[3] !== undefined) {
+      const sign = m[1] === '-' ? -1 : 1;
+      const n = m[2] ? parseInt(m[2], 10) : 1;
+      const f = parseInt(m[3], 10);
+      if (n < 1 || n > 100 || f < 2 || f > 1000) return null;
+      terms.push({ dice: true, sign: sign, n: n, f: f });
+    } else {
+      const sign = m[4] === '-' ? -1 : 1;
+      terms.push({ dice: false, sign: sign, v: parseInt(m[5], 10) });
+    }
+  }
+  if (pos !== s.length || terms.length === 0) return null;
+  return terms;
+}
+
+function rollDice(terms) {
+  let total = 0, min = 0, max = 0, avg = 0;
+  const details = [];
+  for (const t of terms) {
+    if (t.dice) {
+      const rolls = [];
+      for (let i = 0; i < t.n; i++) rolls.push(Math.floor(Math.random() * t.f) + 1);
+      const sum = rolls.reduce((a, b) => a + b, 0);
+      total += t.sign * sum;
+      if (t.sign > 0) { min += t.n; max += t.n * t.f; }
+      else { min -= t.n * t.f; max -= t.n; }
+      avg += t.sign * t.n * (t.f + 1) / 2;
+      details.push((t.sign < 0 ? '-' : '') + t.n + 'd' + t.f + ' : [' + rolls.join(', ') + ']');
+    } else {
+      total += t.sign * t.v;
+      min += t.sign * t.v;
+      max += t.sign * t.v;
+      avg += t.sign * t.v;
+      details.push((t.sign < 0 ? '-' : '+') + t.v);
+    }
+  }
+  return { total: total, min: min, max: max, avg: avg, details: details };
+}
+
+(function () {
+  const input = document.getElementById('dice-expr');
+  const out = document.getElementById('dice-out');
+  const btn = document.getElementById('dice-roll');
+  function run() {
+    const terms = parseDice(input.value);
+    out.textContent = '';
+    if (!terms) {
+      const p = document.createElement('p');
+      p.className = 'over';
+      p.textContent = 'Formule non valide. Exemples : 1d20+5, 2d6, 3d8-2, 1d4+1d6+2.';
+      out.appendChild(p);
+      return;
+    }
+    const r = rollDice(terms);
+    const big = document.createElement('div');
+    big.className = 'result';
+    big.innerHTML = 'Résultat : <strong></strong>';
+    big.querySelector('strong').textContent = r.total;
+    const det = document.createElement('p');
+    det.className = 'muted';
+    det.textContent = r.details.join('  ·  ');
+    const stats = document.createElement('p');
+    stats.textContent = 'Minimum ' + r.min + ' · Maximum ' + r.max + ' · Moyenne ' + (Math.round(r.avg * 10) / 10);
+    out.appendChild(big);
+    out.appendChild(det);
+    out.appendChild(stats);
+  }
+  btn.addEventListener('click', run);
+  input.addEventListener('keydown', function (e) { if (e.key === 'Enter') run(); });
+  document.querySelectorAll('[data-dice]').forEach(function (b) {
+    b.addEventListener('click', function () { input.value = b.getAttribute('data-dice'); run(); });
+  });
+  run();
+})();
+</script>
+
+  <footer>Guide communautaire non officiel. Aucun lien avec Owlcat Games, Paizo ou Pathfinder. Pathfinder: Wrath of the Righteous est une marque de ses détenteurs respectifs.</footer>
+</main>
+<script src="theme.js"></script>
+</body>
+</html>
