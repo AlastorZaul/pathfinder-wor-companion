@@ -42,9 +42,12 @@ Le site est déployé automatiquement par GitHub Actions à chaque push sur `mai
 
 Les données viennent de :
 - **Wiki Fextralife** : pages Companions, Companion Builds et Builds, ainsi que les guides de build par compagnon.
+- **Wiki Kingmaker** (tableaux des compagnons, pour les classes et les races).
+- **Game-Rack** : classement des compagnons du 19 juin 2026 (patch 2.7.0x), niveaux S et A.
 
 Limites à garder en tête :
-- Plusieurs guides datent de septembre 2021 et ne correspondent peut-être plus à la version actuelle du jeu.
+- Plusieurs guides Fextralife datent de septembre 2021 et ne correspondent peut-être plus à la version actuelle du jeu. Le classement Game-Rack est plus récent, mais ses niveaux reposent sur des évaluations communautaires.
+- Pour Ember, les deux sources ne s'accordent pas sur le multiclassage. Le point reste à trancher en jeu.
 - Les niveaux et les ordres de dons ne sont pas tous vérifiés en jeu.
 - Les pages de classe du wiki ne donnent pas de build précis, seulement une entrée par classe.
 - Le guide de Woljif Jefto cite trois attributs dans son en-tête pour un texte qui en utilise deux ; le point est à vérifier.
