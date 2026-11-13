@@ -16,6 +16,7 @@ Site en ligne : https://alastorzaul.github.io/pathfinder-wor-companion/
 - **Builds maison** : builds inventés à partir des guides du wiki, non testés en jeu. Première version : un Cavalier tank pour une première partie en Normal, avec les dons encore à choisir.
 
 ### Outils
+- **Mods** : présentation de ModFinder, le gestionnaire de mods de la communauté (application de bureau, licence MIT), avec les prérequis et un lien vers le dépôt.
 - **Calculateur de dés** : formules de dés avec bonus ou malus, minimum, maximum et moyenne, et bonus ou malus conditionnels à cocher.
 
 ## Structure du dépôt
@@ -24,6 +25,7 @@ Site en ligne : https://alastorzaul.github.io/pathfinder-wor-companion/
 index.html          Accueil
 companions.html     Vue d'ensemble des compagnons
 calculateur-des.html Calculateur de dés
+mods.html           Mods (ModFinder)
 builds.html         Builds par classe
 <compagnon>.html    Une page par compagnon détaillé
 style.css           Style commun à toutes les pages
