@@ -330,3 +330,10 @@ a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visibl
     background: rgba(0, 0, 0, 0.5);
   }
 }
+
+/* --- Marque et synthèse des fiches compagnons --- */
+nav.site-nav .nav-brand { display: block; font-weight: 600; color: var(--fg); text-decoration: none; margin: 0 0 12px; font-size: 1.05rem; }
+.card.summary dl { display: grid; grid-template-columns: max-content 1fr; gap: 6px 18px; margin: 0; }
+.card.summary dt { color: var(--muted); font-size: 0.9rem; }
+.card.summary dd { margin: 0; }
+.card.summary a { color: var(--accent); }
