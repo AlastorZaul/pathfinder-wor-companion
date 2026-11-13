@@ -40,7 +40,10 @@ Le site est publié par GitHub Pages directement depuis la branche `main` (racin
 
 ## Noms en anglais
 
-Les noms de dons, de sorts et de classes ont été traduits quand une page française du wiki les donne. Les autres restent en anglais, par exemple Coordinated Defense, Combat Reflexes, Diehard, Phalanx Formation et Shielded Ally.
+Les noms de dons, de sorts et de classes sont en français, d'après le wiki Fextralife et une table de traductions issue du glossaire Pathfinder FR. Les noms suivants restent en anglais, faute de traduction vérifiée :
+
+- Shielded Ally, Phalanx Formation, Armiger, Rowdy Rogue, Uncanny Dodge, Improved Uncanny Dodge.
+- Rogue : le wiki Fextralife donne « Voleur », la table donne « Roublard ». À trancher.
 
 ## Sources et limites
 
