@@ -52,6 +52,12 @@
   <p><button class="btn" type="button" data-dice="1d20">1d20</button> <button class="btn" type="button" data-dice="1d20+5">1d20+5</button> <button class="btn" type="button" data-dice="2d6">2d6</button> <button class="btn" type="button" data-dice="1d8+3">1d8+3</button> <button class="btn" type="button" data-dice="3d6">3d6</button> <button class="btn" type="button" data-dice="4d6">4d6</button></p>
   <div id="dice-out" aria-live="polite"></div>
 
+  <h2>Conditions</h2>
+  <label for="dice-cond">Bonus et malus conditionnels</label>
+  <input class="filter-input" id="dice-cond" type="text" placeholder="Flanquement +2, Aveuglé -4" autocomplete="off">
+  <p class="muted">Écris-les séparés par des virgules. Coche ceux qui s'appliquent au jet ; ils s'ajoutent au total, au minimum, au maximum et à la moyenne.</p>
+  <div id="dice-conds"></div>
+
   <h2>Notes</h2>
   <ul>
     <li>Les jets utilisent le générateur aléatoire du navigateur. Ce calculateur ne tient pas compte des bonus de situation ni des règles du jeu.</li>
@@ -111,6 +117,40 @@ function rollDice(terms) {
   const input = document.getElementById('dice-expr');
   const out = document.getElementById('dice-out');
   const btn = document.getElementById('dice-roll');
+  const condInput = document.getElementById('dice-cond');
+  const condBox = document.getElementById('dice-conds');
+  function parseConds(text) {
+    const list = [];
+    text.split(',').forEach(function (piece) {
+      const m = piece.match(/^\s*(.+?)\s*([+-]\s*\d+)\s*$/);
+      if (m) list.push({ label: m[1], value: parseInt(m[2].replace(/\s+/g, ''), 10) });
+    });
+    return list;
+  }
+  function renderConds() {
+    condBox.textContent = '';
+    parseConds(condInput.value).forEach(function (c, i) {
+      const lab = document.createElement('label');
+      lab.style.display = 'inline-block';
+      lab.style.marginRight = '16px';
+      const cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.id = 'dice-cond-' + i;
+      cb.setAttribute('data-value', String(c.value));
+      cb.setAttribute('data-label', c.label);
+      cb.addEventListener('change', run);
+      lab.appendChild(cb);
+      lab.appendChild(document.createTextNode(' ' + c.label + ' (' + (c.value > 0 ? '+' : '') + c.value + ')'));
+      condBox.appendChild(lab);
+    });
+  }
+  function activeConds() {
+    const act = [];
+    condBox.querySelectorAll('input[type=checkbox]').forEach(function (cb) {
+      if (cb.checked) act.push({ label: cb.getAttribute('data-label'), value: parseInt(cb.getAttribute('data-value'), 10) });
+    });
+    return act;
+  }
   function run() {
     const terms = parseDice(input.value);
     out.textContent = '';
@@ -122,6 +162,10 @@ function rollDice(terms) {
       return;
     }
     const r = rollDice(terms);
+    const acts = activeConds();
+    const mod = acts.reduce(function (a, c) { return a + c.value; }, 0);
+    r.total += mod; r.min += mod; r.max += mod; r.avg += mod;
+    acts.forEach(function (c) { r.details.push(c.label + ' ' + (c.value > 0 ? '+' : '') + c.value); });
     const big = document.createElement('div');
     big.className = 'result';
     big.innerHTML = 'Résultat : <strong></strong>';
@@ -136,10 +180,12 @@ function rollDice(terms) {
     out.appendChild(stats);
   }
   btn.addEventListener('click', run);
+  condInput.addEventListener('input', function () { renderConds(); run(); });
   input.addEventListener('keydown', function (e) { if (e.key === 'Enter') run(); });
   document.querySelectorAll('[data-dice]').forEach(function (b) {
     b.addEventListener('click', function () { input.value = b.getAttribute('data-dice'); run(); });
   });
+  renderConds();
   run();
 })();
 </script>

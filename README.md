@@ -16,7 +16,7 @@ Site en ligne : https://alastorzaul.github.io/pathfinder-wor-companion/
 - **Builds maison** : builds inventés à partir des guides du wiki, non testés en jeu. Première version : un Cavalier tank pour une première partie en Normal, avec les dons encore à choisir.
 
 ### Outils
-- **Calculateur de dés** : formules de dés avec bonus ou malus (NdF+B), avec minimum, maximum et moyenne.
+- **Calculateur de dés** : formules de dés avec bonus ou malus, minimum, maximum et moyenne, et bonus ou malus conditionnels à cocher.
 
 ## Structure du dépôt
 
