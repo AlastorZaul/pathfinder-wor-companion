@@ -13,6 +13,7 @@ Site en ligne : à définir (GitHub Pages, une fois le dépôt créé).
 
 ### Builds
 - **Builds par classe** : pages de build du wiki (Eldritch Knight, Inquisitor, Magus, Monk, Rogue, Warpriest, Bloodrager, Arcanist), builds d'archers et guides mis en avant.
+- **Builds maison** : builds inventés à partir des guides du wiki, non testés en jeu. Première version : un Cavalier tank pour une première partie en Normal, avec les dons encore à choisir.
 
 ## Structure du dépôt
 
