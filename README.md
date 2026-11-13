@@ -2,7 +2,7 @@
 
 Guides de build pour les compagnons de **Pathfinder: Wrath of the Righteous**, en français.
 
-Site en ligne : à définir (GitHub Pages, une fois le dépôt créé).
+Site en ligne : https://alastorzaul.github.io/pathfinder-wor-companion/
 
 ## Contenu
 
@@ -34,7 +34,7 @@ Camellia, Seelah, Lann, Wenduag et Nenio n'ont qu'une description de classe sur 
 
 ## Déploiement
 
-Le site est déployé automatiquement par GitHub Actions à chaque push sur `main` (voir `.github/workflows/pages.yml`). Si le déploiement est en attente, il faut l'approuver dans l'onglet **Actions** du dépôt.
+Le site est publié par GitHub Pages directement depuis la branche `main` (racine du dépôt). Chaque push sur `main` relance le déploiement natif, sans workflow maison.
 
 ## Sources et limites
 
