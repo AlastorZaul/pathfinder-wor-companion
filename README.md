@@ -23,7 +23,6 @@ builds.html         Builds par classe
 <compagnon>.html    Une page par compagnon détaillé
 style.css           Style commun à toutes les pages
 theme.js            Bouton clair / sombre et menu mobile
-.github/workflows/  Déploiement automatique sur GitHub Pages
 ```
 
 Chaque page reprend la même barre de navigation. Quand tu ajoutes une page, pense à l'ajouter dans la barre de navigation de toutes les autres, et dans l'accueil.
