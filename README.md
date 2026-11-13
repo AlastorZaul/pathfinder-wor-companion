@@ -38,6 +38,10 @@ Chaque page reprend la même barre de navigation. Quand tu ajoutes une page, pen
 
 Le site est publié par GitHub Pages directement depuis la branche `main` (racine du dépôt). Chaque push sur `main` relance le déploiement natif, sans workflow maison.
 
+## Noms en anglais
+
+Les noms de dons, de sorts et de classes ont été traduits quand une page française du wiki les donne. Les autres restent en anglais, par exemple Coordinated Defense, Combat Reflexes, Diehard, Phalanx Formation et Shielded Ally.
+
 ## Sources et limites
 
 Les données viennent de :
